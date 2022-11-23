@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+    <h3>Detail Products</h3> <br/>
+        <h5>{{ product.name }} <br/></h5>
+        <br><img src="{{ product.image.url }}" alt="" style = "width:400px">
+        <br>
+        <br>
+        <h6> Price: {{ product.price }}$</h6>
+        <br>
+        <b>Description: </b>
+        <p>{{ product.description }}</p>
+        <br><br>
+        <form action="{% url 'orders:cart_add'  product.id %}" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Add To Card" style="background-color: crimson; color: white;" class="rounded" class="border border-0"  >
+        </form>
+
+{% endblock %}

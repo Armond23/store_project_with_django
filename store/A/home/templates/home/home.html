@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block extra_header %}
+    <link rel="stylesheet" href="{% static 'home/css/styles.css/' %}">
+{% endblock extra_header %}
+
+{% block content %}
+
+<h2>Products</h2> <br>
+    {% for category in categories %}
+            <div class="btn-group">
+                <a href=" {{ category.get_absolute_url }} " class="btn btn-danger">{{ category.name }}</a>
+                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="visually-hidden">Toggle Dropdown</span>
+                </button>
+                <ul class="dropdown-menu">
+                    {% for sub_cat in category.scategory.all %}
+                        <li><a class="dropdown-item" href="{{ sub_cat.get_absolute_url }}">{{ sub_cat.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+    {% endfor %}
+        <br/><br/>
+
+    {% for product in products %}
+    <div class="card" style="width: 16rem; display: inline-block;">
+        <img class="card-img-top" src="{{ product.image.url }}" alt="product/mac">
+        <div class="card-body">
+            <a href="{{ product.get_absolute_url }}" class="btn btn-danger">{{ product.name }}</a> 
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
+
+
